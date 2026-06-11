@@ -1,0 +1,43 @@
+[{
+        "supplierID": "sup1",
+        "materials": [{
+                "materialID": "con_1",
+                "C3": 12,
+                "C7": 7
+            },
+            {
+                "materialID": "con_2",
+                "C3": 5,
+                "C7": 9
+            }
+        ]
+    },
+    {
+        "supplierID": "sup2",
+        "materials": [{
+            "materialID": "con_1",
+            "C3": 20,
+            "C7": 11
+        }]
+    },
+    {
+        "supplierID": "sup3",
+        "materials": [{
+            "materialID": "con_1",
+            "C3": 15,
+            "C7": 7
+        }, {
+            "materialID": "fill_1",
+            "C3": 20,
+            "C7": 11
+        }]
+    },
+    {
+        "supplierID": "sup4",
+        "materials": [{
+            "materialID": "fill_1",
+            "C3": 30,
+            "C7": 1
+        }]
+    }
+]
