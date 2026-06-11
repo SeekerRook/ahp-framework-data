@@ -1,0 +1,23 @@
+version: "0.1"
+
+services:
+  datafetch-api:
+    build: 
+      context : .
+      dockerfile: Dockerfile.service
+    container_name: anv-datafetch-api
+    ports:
+      - "8132:8000"
+    environment:
+      MATERIALS_DB_URL: mongodb://admin:toor@anv-materials-db:27017/
+      SUPPLIERS_DB_URL: mongodb://admin:toor@anv-supplier-db:27017/
+      ORDERS_DB_URL: mongodb://admin:toor@anv-orderreg-db:27017/
+  datafetch-job:
+    build: 
+      context : .
+      dockerfile: Dockerfile.job
+    container_name: anv-datafetch
+    environment:
+      MATERIALS_DB_URL: mongodb://admin:toor@anv-materials-db:27017/
+      SUPPLIERS_DB_URL: mongodb://admin:toor@anv-supplier-db:27017/
+      ORDERS_DB_URL: mongodb://admin:toor@anv-orderreg-db:27017/

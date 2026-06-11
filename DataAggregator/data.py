@@ -1,9 +1,8 @@
-from fastapi import FastAPI, HTTPException
 from pymongo import MongoClient
 from collections import defaultdict
 import os
 
-app = FastAPI(title="Materials API")
+
 
 MATERIALS_DB_URL = os.environ["MATERIALS_DB_URL"]
 SUPPLIERS_DB_URL = os.environ["SUPPLIERS_DB_URL"]
@@ -89,26 +88,35 @@ def fetch_data() -> dict:
         orders_client.close()
 
 
-@app.get("/alternatives", summary="Get all material alternatives with supplier scores")
-def get_alternatives():
-    try:
-        return fetch_data()
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
 
 
-@app.get("/alternatives/{material_type}", summary="Get alternatives for a specific material type")
-def get_alternatives_by_type(material_type: str):
-    try:
-        data = fetch_data()
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+if __name__=="__main__":
+    import json
+    print(f'{json.dumps(fetch_data(), indent=4)}')
+else:
+    from fastapi import FastAPI, HTTPException
 
-    if material_type not in data:
-        raise HTTPException(status_code=404, detail=f"Material type '{material_type}' not found")
-    return {material_type: data[material_type]}
+    app = FastAPI(title="Materials API")
+    @app.get("/alternatives", summary="Get all material alternatives with supplier scores")
+    def get_alternatives():
+        try:
+            return fetch_data()
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
 
 
-@app.get("/health")
-def health():
-    return {"status": "ok"}
+    @app.get("/alternatives/{material_type}", summary="Get alternatives for a specific material type")
+    def get_alternatives_by_type(material_type: str):
+        try:
+            data = fetch_data()
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
+
+        if material_type not in data:
+            raise HTTPException(status_code=404, detail=f"Material type '{material_type}' not found")
+        return {material_type: data[material_type]}
+
+
+    @app.get("/health")
+    def health():
+        return {"status": "ok"}
