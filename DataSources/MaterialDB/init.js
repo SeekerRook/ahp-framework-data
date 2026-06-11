@@ -41,27 +41,31 @@ db.createCollection("materials", {
 });
 
 // Insert initial dataset
-db.materials.insertMany([{
-        materialID: "con_1",
-        type: "concrete",
-        C1: 12,
-        C2: 3,
-        C5: 3,
-        C6: 3
-    },
-    {
-        materialID: "con_2",
-        type: "concrete",
-        C1: 20,
-        C2: 7,
-        C5: 5,
-        C6: 9
-    }, {
-        materialID: "fill_1",
-        type: "fillament",
-        C1: 12,
-        C2: 3,
-        C5: 3,
-        C6: 3
-    }
-]);
+const fs = require('fs')
+const raw = fs.readFileSync("/docker-entrypoint-initdb.d/materials.json", "utf8")
+const materials = JSON.parse(raw)
+db.materials.insertMany(materials)
+    // db.materials.insertMany([{
+    //         materialID: "con_1",
+    //         type: "concrete",
+    //         C1: 12,
+    //         C2: 3,
+    //         C5: 3,
+    //         C6: 3
+    //     },
+    //     {
+    //         materialID: "con_2",
+    //         type: "concrete",
+    //         C1: 20,
+    //         C2: 7,
+    //         C5: 5,
+    //         C6: 9
+    //     }, {
+    //         materialID: "fill_1",
+    //         type: "fillament",
+    //         C1: 12,
+    //         C2: 3,
+    //         C5: 3,
+    //         C6: 3
+    //     }
+    // ]);
