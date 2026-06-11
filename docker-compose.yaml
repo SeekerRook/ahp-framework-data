@@ -34,16 +34,16 @@ services:
       MATERIALS_DB_URL: mongodb://admin:toor@anv-materials-db:27017/
       SUPPLIERS_DB_URL: mongodb://admin:toor@anv-supplier-db:27017/
       ORDERS_DB_URL: mongodb://admin:toor@anv-orderreg-db:27017/
-mongo-ui:
-    image: mongoclient/mongoclient:latest
-    ports:
-      - "3132:3000"
-    volumes:
-      - mongoclient-data:/data/db   # persists your saved connections
-    depends_on:
-      - materials-db
-      - suppliers-db
-      - orders-db
+  mongo-ui:
+      image: mongoclient/mongoclient:latest
+      ports:
+        - "3132:3000"
+      volumes:
+        - mongoclient-data:/data/db   # persists your saved connections
+      depends_on:
+        - materials-mongo
+        - suppliers-mongo
+        - orderreg-mongo
 
 volumes:
   mongoclient-data:

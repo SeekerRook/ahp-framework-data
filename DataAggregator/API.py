@@ -57,7 +57,7 @@ def fetch_data() -> dict:
         stats: dict = defaultdict(list)
         for o in orders_col.find():
             key = (o["pID"], o["supplier"])
-            stats[key].append(o["nominal"] - o["actual"])
+            stats[key].append(o["actual"] - o["nominal"])
 
         # Build alternatives report
         alternatives: dict[str, list] = {}
