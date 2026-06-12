@@ -4,7 +4,9 @@ services:
   datafetch-api:
     build: 
       context : .
-      dockerfile: Dockerfile.service
+      dockerfile: Dockerfile
+    container_name: datafetch-api
+
     ports:
       - "8132:8000"
     environment:
