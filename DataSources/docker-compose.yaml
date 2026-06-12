@@ -1,45 +1,57 @@
 version: "0.1"
 
 services:
-  materials-mongo:
+  materials-db:
     build: MaterialDB
-    container_name: anv-materials-db
+    container_name: materials-db
     ports:
       - "27018:27017"
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: toor
-  suppliers-mongo:
+    networks:
+      - shared
+      - default   
+
+
+  suppliers-db:
     build: Supplier
-    container_name: anv-supplier-db
+    container_name: supplier-db
     ports:
       - "27019:27017"
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: toor
-  orderreg-mongo:
+    networks:
+      - shared
+      - default   
+  orderreg-db:
     build: OrderRegistry
-    container_name: anv-orderreg-db
+    container_name: orderreg-db
     ports:
       - "27016:27017"
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: toor
-  mongo-ui:
+    networks:
+      - shared
+      - default   
+  db-ui:
       image: mongoclient/mongoclient:latest
       ports:
         - "3132:3000"
       volumes:
         - mongoclient-data:/data/db   # persists your saved connections
       depends_on:
-        - materials-mongo
-        - suppliers-mongo
-        - orderreg-mongo
+        - materials-db
+        - suppliers-db
+        - orderreg-db
 
 volumes:
   mongoclient-data:
-  # ahp:
-  #   build: AHP
-  #   container_name: anv-ahp
-  #   ports:
-  #     - "8080:8080"
+
+networks:
+  shared:
+    external: true
+    name: anv-net
+

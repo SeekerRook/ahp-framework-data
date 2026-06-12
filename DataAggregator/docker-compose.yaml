@@ -5,19 +5,25 @@ services:
     build: 
       context : .
       dockerfile: Dockerfile.service
-    container_name: anv-datafetch-api
     ports:
       - "8132:8000"
     environment:
-      MATERIALS_DB_URL: mongodb://admin:toor@anv-materials-db:27017/
-      SUPPLIERS_DB_URL: mongodb://admin:toor@anv-supplier-db:27017/
-      ORDERS_DB_URL: mongodb://admin:toor@anv-orderreg-db:27017/
+      MATERIALS_DB_URL: mongodb://admin:toor@materials-db:27017/
+      SUPPLIERS_DB_URL: mongodb://admin:toor@supplier-db:27017/
+      ORDERS_DB_URL: mongodb://admin:toor@orderreg-db:27017/
+    networks:
+      - shared
   datafetch-job:
     build: 
       context : .
       dockerfile: Dockerfile.job
-    container_name: anv-datafetch
     environment:
-      MATERIALS_DB_URL: mongodb://admin:toor@anv-materials-db:27017/
-      SUPPLIERS_DB_URL: mongodb://admin:toor@anv-supplier-db:27017/
-      ORDERS_DB_URL: mongodb://admin:toor@anv-orderreg-db:27017/
+      MATERIALS_DB_URL: mongodb://admin:toor@materials-db:27017/
+      SUPPLIERS_DB_URL: mongodb://admin:toor@supplier-db:27017/
+      ORDERS_DB_URL: mongodb://admin:toor@orderreg-db:27017/
+    networks:
+      - shared
+networks:
+  shared:
+    external: true
+    name: anv-net
