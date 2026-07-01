@@ -30,7 +30,7 @@ db.createCollection("suppliers", {
                                 bsonType: ["int", "double"],
                                 description: "C3 must be an integer"
                             },
-                            C7: {
+                            C5: {
                                 bsonType: ["int", "double"],
                                 description: "C7 must be an integer"
                             }

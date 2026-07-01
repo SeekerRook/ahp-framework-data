@@ -27,11 +27,11 @@ db.createCollection("materials", {
                     bsonType: ["int", "double"],
                     description: "must be numeric"
                 },
-                C5: {
+                C6: {
                     bsonType: "int",
                     description: "must be integer"
                 },
-                C6: {
+                C7: {
                     bsonType: "int",
                     description: "must be integer"
                 }
