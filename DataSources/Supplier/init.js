@@ -20,7 +20,7 @@ db.createCollection("suppliers", {
                     description: "materials must be an array of material objects",
                     items: {
                         bsonType: "object",
-                        required: ["materialID", "C3", "C7"],
+                        required: ["materialID", "C3", "C5"],
                         properties: {
                             materialID: {
                                 bsonType: "string",
@@ -32,7 +32,7 @@ db.createCollection("suppliers", {
                             },
                             C5: {
                                 bsonType: ["int", "double"],
-                                description: "C7 must be an integer"
+                                description: "C5 must be an integer"
                             }
                         }
                     }

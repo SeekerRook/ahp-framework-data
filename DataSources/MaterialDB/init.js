@@ -9,7 +9,7 @@ db.createCollection("materials", {
     validator: {
         $jsonSchema: {
             bsonType: "object",
-            required: ["materialID", "type", "C1", "C2", "C5", "C6"],
+            required: ["materialID", "type", "C1", "C2", "C6", "C7"],
             properties: {
                 materialID: {
                     bsonType: "string",
