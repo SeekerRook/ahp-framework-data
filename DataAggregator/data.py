@@ -35,8 +35,8 @@ def fetch_data() -> dict:
                 "materialID": m.get("materialID"),
                 "C1": m.get("C1"),
                 "C2": m.get("C2"),
-                "C5": m.get("C5"),
                 "C6": m.get("C6"),
+                "C7": m.get("C7"),
             })
 
         # Load supplier info keyed by materialID
@@ -49,7 +49,7 @@ def fetch_data() -> dict:
                 suppliers[mid].append({
                     "supplierID": s.get("supplierID"),
                     "C3": m.get("C3"),
-                    "C7": m.get("C7"),
+                    "C5": m.get("C5"),
                 })
 
         # Aggregate order diffs per (materialID, supplierID)
@@ -75,9 +75,9 @@ def fetch_data() -> dict:
                         "C2": m["C2"],
                         "C3": s["C3"],
                         "C4": C4,
-                        "C5": m["C5"],
+                        "C5": s["C5"],
                         "C6": m["C6"],
-                        "C7": s["C7"],
+                        "C7": m["C7"],
                     })
 
         return alternatives
